@@ -1,0 +1,35 @@
+﻿@model List<Node>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shortest Path</title>
+</head>
+<body>
+    <h1>Shortest Path</h1>
+
+    @foreach (var node in Model)
+    {
+        <h2>@node.Name</h2>
+        <ul>
+            @foreach (var edge in node.AdjacentEdges)
+            {
+                <li>
+                    Target Node: @edge.TargetNode.Name, Weight: @edge.Weight
+                    @if (edge.TargetNode.AdjacentEdges.Any())
+                    {
+                        <ul>
+                            @foreach (var subEdge in edge.TargetNode.AdjacentEdges)
+                            {
+                                <li>
+                                    Target Node: @subEdge.TargetNode.Name, Weight: @subEdge.Weight
+                                </li>
+                            }
+                        </ul>
+                    }
+                </li>
+            }
+        </ul>
+    }
+</body>
+</html>

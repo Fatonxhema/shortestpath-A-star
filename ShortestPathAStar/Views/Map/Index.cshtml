@@ -1,0 +1,69 @@
+﻿@model List<Node> 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map View</title>
+    <!-- Include necessary map libraries and scripts here -->
+</head>
+<body>
+    <h1>Items</h1>
+
+    <form asp-action="FindShortestPath" method="post">
+        <label for="start">Choose start city:</label>
+        <select id="start" name="start">
+            <option value="">Select an item</option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.Name">@item.Name</option>
+            }
+        </select>
+        <br />
+        <label for="end">Choose end city:</label>
+        <select id="end" name="end">
+            <option value="">Select an item</option>
+            @foreach (var item in Model)
+            {
+                <option value="@item.Name">@item.Name</option>
+            }
+        </select>
+        <input type="submit" value="Submit" />
+    </form>
+    <div id="map"></div>
+
+    <script>
+        var map;
+
+        function initMap() {
+            // Initialize the map
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: YOUR_DEFAULT_LATITUDE, lng: YOUR_DEFAULT_LONGITUDE },
+                zoom: YOUR_DEFAULT_ZOOM
+            });
+
+            // Add any initial pins or markers here
+        }
+        var marker = new google.maps.Marker({
+            position: { lat: PIN_LATITUDE, lng: PIN_LONGITUDE },
+            map: map,
+            title: 'Pin Title'
+        });
+        // Example AJAX call to find shortest path
+        function findShortestPath(startPinId, endPinId) {
+            $.ajax({
+                url: '/Map/FindShortestPath',
+                type: 'POST',
+                data: { startPinId: startPinId, endPinId: endPinId },
+                success: function (response) {
+                    // Handle the response from the server
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                }
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+    
+</body>
+</html>
