@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Server.HttpSys;
 using ShortestPathAStar.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Map}/{action=Index}/{id?}");
 
 app.Run();

@@ -21,9 +21,12 @@
                         <ul>
                             @foreach (var subEdge in edge.TargetNode.AdjacentEdges)
                             {
+                                if (subEdge.TargetNode != null)
+                                {
                                 <li>
                                     Target Node: @subEdge.TargetNode.Name, Weight: @subEdge.Weight
                                 </li>
+                                }
                             }
                         </ul>
                     }
