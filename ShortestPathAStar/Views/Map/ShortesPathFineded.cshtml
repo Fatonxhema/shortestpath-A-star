@@ -7,32 +7,44 @@
 </head>
 <body>
     <h1>Shortest Path</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-4 justify-content-center align-content-center">
 
-    @foreach (var node in Model)
-    {
-        <h2>@node.Name</h2>
-        <ul>
-            @foreach (var edge in node.AdjacentEdges)
-            {
-                <li>
-                    Target Node: @edge.TargetNode.Name, Weight: @edge.Weight
-                    @if (edge.TargetNode.AdjacentEdges.Any())
-                    {
-                        <ul>
-                            @foreach (var subEdge in edge.TargetNode.AdjacentEdges)
-                            {
-                                if (subEdge.TargetNode != null)
+                @foreach (var node in Model)
+                {
+                    <h2>@node.Name</h2>
+                    <ul>
+                        @foreach (var edge in node.AdjacentEdges)
+                        {
+                            <li>
+                                Target Node: @edge.TargetNode.Name, Weight: @edge.Weight
+                                @if (edge.TargetNode.AdjacentEdges.Any())
                                 {
-                                <li>
-                                    Target Node: @subEdge.TargetNode.Name, Weight: @subEdge.Weight
-                                </li>
+                                    <ul>
+                                        @foreach (var subEdge in edge.TargetNode.AdjacentEdges)
+                                        {
+                                            if (subEdge.TargetNode != null)
+                                            {
+                                            <li>
+                                                Target Node: @subEdge.TargetNode.Name, Weight: @subEdge.Weight
+                                            </li>
+                                            }
+                                        }
+                                    </ul>
                                 }
-                            }
-                        </ul>
-                    }
-                </li>
-            }
-        </ul>
-    }
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+            <div class="col-8">
+                <div class="map " id="map" style="width:200px; height:200px;">
+                    <img src="~/images/kosovomap.jpg" alt="Map Photo" width="400" height="400" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
