@@ -4,7 +4,8 @@ namespace ShortestPathAStar.Services
 {
     public class ShortestPathAlgorithm : IShortestPathAlgorithm
     {
-        // Construct the map graph (replace with actual implementation)
+        // Construct the map graph 
+        #region GraphConstruction
         public Graph ConstructMapGraph()
         {
             // Initialize a new graph
@@ -50,8 +51,9 @@ namespace ShortestPathAStar.Services
 
             return kosovoMap;
         }
-
+        #endregion
         // A* Algorithm implementation
+        #region A Start Implementation
         public List<Node> AStarAlgorithm(Node start, Node goal)
         {
             Graph graph = this.ConstructMapGraph();
@@ -118,8 +120,8 @@ namespace ShortestPathAStar.Services
             // No path found
             return new List<Node>();
         }
-
-        // Heuristic cost estimate function (replace with actual heuristic)
+        #endregion
+        // Heuristic cost estimate functions
         private static double EuclideanDistance(Node from, Node to)
         {
             double dx = Math.Pow(to.X - from.X, 2);
@@ -136,7 +138,7 @@ namespace ShortestPathAStar.Services
         }
 
         // Get the node with the lowest f-score from the open set
-        private static Node GetNodeWithLowestFScore(HashSet<Node> openSet, Dictionary<Node, double> fScore)
+        private static Node? GetNodeWithLowestFScore(HashSet<Node> openSet, Dictionary<Node, double> fScore)
         {
             Node lowestNode = null;
             double lowestScore = double.PositiveInfinity;
